@@ -1,6 +1,8 @@
 import os
 import pandas as pd
 
+os.chdir(os.path.dirname(os.getcwd()))
+
 def import_csv_to_df(file_path: str, csv_name: str, delimiter: str = ',', index_col: str = 'raceId') -> pd.DataFrame:
     """ Use pandas to import a CSV to a dataframe and set index if required. Current working directory is set to the project root for the user.
     Args:
