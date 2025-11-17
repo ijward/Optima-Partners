@@ -25,7 +25,7 @@ df_races["calc_datetime"] = (
 )  # Calculate datetime field
 df_races = df_races.drop(columns=(["date", "time"]))
 
-print("\nAPPLYING SPECIFIC REQUIREMENTS TO df_results")
+print("\nAPPLYING SPECIFIC REQUIREMENTS TO df_results\n")
 df_results["position"] = df_results["position"].fillna(-1).astype(
     "int64"
 )  # replace missing position as -1 so returns int
@@ -77,11 +77,14 @@ del df_races, df_results, column_names, df_layout
 yrs = df["year"].unique()
 for yr in yrs:
     f_name = f"stats_{yr}.json"
-    try:
-        publish_df_to_aws_bucket_as_json(df.loc[df["year"] == yr], 'aws-bucket-name', f_name)   
-    except:
-        print(f"Generating json file {f_name}")
-        df.loc[df["year"] == yr, df.columns != "year"].to_json(
+    """
+        # UNCOMMENT THE FOLLOWING TO PUSH FILES TO AWS BUCKET
+        # ENSURE THAT AWS CREDENTIALS ARE CONFIGURED PROPERLY
+        print(f"Pushing json file to AWS bucket: {f_name}")
+        publish_df_to_aws_bucket_as_json(df.loc[df["year"] == yr], 'aws-bucket-name', f_name)
+    """   
+    print(f"Generating json file {f_name}")
+    df.loc[df["year"] == yr, df.columns != "year"].to_json(
         f"{project_root}/results/{f_name}",
         orient="records",
         date_format="iso",
@@ -89,4 +92,4 @@ for yr in yrs:
         indent=4,
     )
 del df
-print("\nPROCESS COMPLETED SUCCESSFULLY.")
+print("\nPROCESS COMPLETED SUCCESSFULLY.\n")
