@@ -3,11 +3,11 @@ import os
 
 # set cwd to repository/project root (two levels above this file)
 print(os.getcwd())
-os.chdir(os.path.dirname(os.getcwd()))
+#os.chdir(os.path.dirname(os.getcwd()))
 cwd = os.getcwd()
 print(os.path.abspath(cwd))
-print(f'Working directory currently set to: {os.getcwd()}')
-from functions import import_csv_to_df
+print(f'Working directory currently set to: {cwd}')
+from solution.functions import import_csv_to_df
 
 
 
