@@ -44,7 +44,7 @@ This repository is for the Optima Partners engineering assignments assessment. S
    python3 solution/main.py
    ```
 
-   Or, if using Python 3 as default:
+   Or, if using Windows:
 
    ```bash
    python solution/main.py
@@ -72,6 +72,8 @@ Each output JSON file contains the following fields for that year's races:
 - `Race Winning driverId` — the driver ID of the race winner
 - `Race Fastest Lap` — the fastest lap time recorded in the race
 
+**NB: Testing has confirmed that not all races have a position 1 entry in the results dataset. The join has been set as 'Inner' so these races will not be output to JSON. Requirements need to be clarified and if necessary, join should be updated to 'Left' and retested.**
+
 ### Troubleshooting
 
 - **ModuleNotFoundError: No module named 'pandas'**: Install pandas using `pip install pandas`
@@ -87,7 +89,7 @@ The project includes comprehensive unit tests and quality checks:
 Execute all tests with coverage reporting:
 
 ```bash
-pytest tests/ --cov=functions --cov-report=html
+pytest --cov --cov-report=html:testcov
 ```
 
 ### Test Coverage
@@ -104,4 +106,4 @@ pytest tests/ --cov=functions --cov-report=html
 
 ### Coverage Report
 
-HTML coverage reports are generated in `htmlcov/` directory. Open `htmlcov/index.html` in a browser to view detailed coverage metrics.
+HTML coverage reports are generated in `testcov/` directory. Open `testVcov/index.html` in a browser to view detailed coverage metrics.
