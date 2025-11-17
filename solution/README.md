@@ -10,7 +10,8 @@ This repository is for the Optima Partners engineering assignments assessment. S
   - `results.csv` — finishing position of each driver per race including fastest lap.
 - `results/`    : Generated outputs (JSON files) by year, e.g. `stats_2018.json` through `stats_2024.json`.
 - `solution/`   :
-  - `main.py` — script to import the csvs and join based on raceId. Requirements specify fields to be exported and their names, creating one JSON file per year.
+  - `main.py` — script to import the CSVs and join based on `raceId`. Filters results to include only race winners (position = 1) and creates one JSON file per year with race statistics.
+  - `functions.py` — contains the `import_csv_to_df()` function for importing CSV files to pandas DataFrames with configurable delimiters and index columns.
 
 ## Quick Start
 
@@ -56,12 +57,20 @@ When successful, the script will:
 - Read CSV files from `source-data/` directory:
   - `races.csv` — race metadata with dates and times
   - `results.csv` — driver finishing positions and lap data
+- Combine date and time fields into a single UTC datetime field (using "00:00:00" for null times)
+- Filter results to include only race winners (position = 1)
 - Join the datasets based on `raceId`
-- Process the combined data according to specification
 - Generate JSON output files in `results/` directory, organized by year:
   - `stats_2018.json` through `stats_2024.json`
 
-Each output JSON file contains the transformed and filtered race statistics for that year.
+Each output JSON file contains the following fields for that year's races:
+
+- `year` — the race year
+- `Race Name` — the name of the race
+- `Race Round` — the round number in the season
+- `Race Datetime` — the combined UTC datetime of the race
+- `Race Winning driverId` — the driver ID of the race winner
+- `Race Fastest Lap` — the fastest lap time recorded in the race
 
 ### Troubleshooting
 

@@ -1,10 +1,14 @@
-import sys
 import os
-os.chdir(os.path.dirname(os.getcwd()))
+# Set CWD to repository root.
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(project_root)
+print(f"\nWorking directory set to: {project_root}")
 
-from functions.csv_to_pandas import import_csv_to_df
+import sys
+sys.path.insert(0, project_root)
+
+from solution.functions import import_csv_to_df
 import pytest
-
 
 def test_import_csv_to_df_no_index():
     # Importing a CSV file without index should keep 'raceId' as a column
