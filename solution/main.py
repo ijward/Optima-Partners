@@ -1,12 +1,10 @@
 import pandas as pd
 import os
 
-# set cwd to repository/project root (two levels above this file)
-print(os.getcwd())
-#os.chdir(os.path.dirname(os.getcwd()))
-cwd = os.getcwd()
-print(os.path.abspath(cwd))
-print(f'Working directory currently set to: {cwd}')
+# set cwd to repository root.
+project_root = os.path.dirname(os.path.abspath(__name__))
+os.chdir(project_root)
+print(f'Working directory set to: {project_root}')
 from solution.functions import import_csv_to_df
 
 
@@ -15,8 +13,7 @@ print('IMPORTING THE CSVs TO PANDAS DATAFRAMES')
 df_races = import_csv_to_df('source-data', 'races.csv')
 df_results = import_csv_to_df('source-data', 'results.csv')
 
-print('APPLYING SPECIFIC REQUIREMENTS TO DFs....')
-print('df_races')
+print('APPLYING SPECIFIC REQUIREMENTS TO df_races')
 df_races['time'] = df_races['time'].fillna('00:00:00')  # If time is null, use 00:00:00
 df_races['calc_datetime'] = (
     pd.to_datetime(df_races['date']
@@ -24,7 +21,7 @@ df_races['calc_datetime'] = (
                    + df_races['time'], format='%Y-%m-%d %H:%M:%S'))  # Calculate datetime field
 df_races = df_races.drop(columns=(['date', 'time']))
 
-print('df_results')
+print('APPLYING SPECIFIC REQUIREMENTS TO df_results')
 df_results['position'] = df_results['position'].fillna(-1).astype('int64')  # replace missing position as -1 so returns int
 df_results = df_results[df_results['position'].astype(int) == 1]
 
@@ -63,7 +60,7 @@ yrs = df['year'].unique()
 for yr in yrs:
     f_name=f'stats_{yr}.json'
     print(f'Generating json file {f_name}')
-    df.loc[df['year'] == yr, df.columns != 'year'].to_json(f'{cwd}/results/{f_name}'
+    df.loc[df['year'] == yr, df.columns != 'year'].to_json(f'{project_root}/results/{f_name}'
                                                            , orient='records'
                                                            , date_format='iso'
                                                            , index=False
