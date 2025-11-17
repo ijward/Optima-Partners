@@ -1,0 +1,5 @@
+testcov/
+results/
+solution/__pycache__/
+.coverage
+.pytest_cache/

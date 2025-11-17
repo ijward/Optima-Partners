@@ -92,7 +92,7 @@ pytest tests/ --cov=functions --cov-report=html
 
 ### Test Coverage
 
-- **test_functions.py**: Core functionality tests
+- **test_process.py**: Core functionality tests
   - `test_import_csv_to_df_no_index()` — validates CSV import without index
   - `test_import_csv_to_df_no_delimiter()` — validates default delimiter handling
   - `test_import_csv_to_df_with_index_in_races()` — validates index setting for races data
@@ -101,9 +101,6 @@ pytest tests/ --cov=functions --cov-report=html
   - `test_import_csv_to_df_missing_file_raises()` — validates error handling for missing files
   - `test_import_csv_to_df_index_col_missing_raises()` — validates error handling for invalid index columns
   - `test_each_race_has_position_one_winner()` — validates race-winner relationships
-
-- **test_quality.py**: Data quality assurance
-  - `test_report_missing_winner_race_ids()` — ensures every race has exactly one position=1 winner in the results
 
 ### Coverage Report
 
